@@ -1,4 +1,4 @@
-﻿using CookBook.Api.Dto;
+﻿using CookBook.Application.Dto;
 using CookBook.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 

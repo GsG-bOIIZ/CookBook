@@ -3,7 +3,7 @@ using CookBook.Application.Dto;
 using CookBook.Infrastructure.UoW;
 using CookBook.Infrastructure.Repository;
 
-namespace CookBook.Api.Services
+namespace CookBook.Application
 {
     public class RecipeService : IRecipeService
     {

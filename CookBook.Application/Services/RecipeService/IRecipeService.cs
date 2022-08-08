@@ -1,7 +1,7 @@
 ﻿using CookBook.Domain;
 using CookBook.Application.Dto;
 
-namespace CookBook.Api.Services
+namespace CookBook.Application
 {
     public interface IRecipeService
     {
