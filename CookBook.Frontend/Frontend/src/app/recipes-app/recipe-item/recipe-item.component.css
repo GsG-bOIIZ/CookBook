@@ -1,0 +1,123 @@
+.recipe {
+    display: flex;
+    
+    box-shadow: 0px 16px 72px rgba(34, 39, 47, 0.5);
+    border-radius: 75px 24px 24px 0;
+    max-width: 1200px;
+    max-height: 430px;
+    margin: 30px;
+    background-color: #fff;
+}
+
+.recipe__image {
+    border-radius: 72px 0px;
+    max-width: 430px;
+    max-height: 430px;
+}
+
+.recipe__card {
+    padding: 36px 49px;
+}
+
+.recipe__header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.recipe__header__tags {
+    display: flex;
+    flex-wrap: wrap;
+    width: 420px;
+}
+
+.recipe__header__tags div {
+    background: #FFECC0;
+    border-radius: 5px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.recipe__header__tags div div {
+    color: #F29E1F;
+    padding: 0px 3px;
+    font: normal 400 14px 'Montserrat';
+}
+
+.recipe__header__buttons {
+    display: flex;    
+}
+
+.recipe__header__buttons div {
+    border: 1px solid #FDB100;
+    border-radius: 16px;
+    min-width: 107px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 7.5px;
+    color: #FDB100;
+    font: normal 600 18px 'Montserrat';
+}
+
+.recipe__text__title {
+    position: relative;
+    top: 25px;
+    font: normal 700 24px 'Montserrat';
+    color: #25292D;
+}
+
+.recipe__text__description {
+    position: relative;
+    top: 45px;
+    font: normal 400 18px 'Montserrat';
+    color: #4A525A;
+}
+
+.recipe__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 470px;
+    position: relative;
+    bottom: -90px;
+}
+
+.recipe__img-time {
+    width: 64px;
+    height: 64px;
+}
+
+.recipe__img-persons {
+    width: 64px;
+    height: 64px;
+}
+
+.recipe__info__cooking-time {
+    display: flex;
+}
+
+.recipe__info__persons {
+    display: flex;
+}
+
+.recipe__info__caption {
+    font: normal 400 14px/28px 'Montserrat';
+    color: #25292D;
+    opacity: 0.5;
+}
+
+.recipe__info__content {
+    font: normal 400 16px/28px 'Montserrat';
+    color: #25292D;
+}
+
+.recipe__info__persons_position {
+    margin-left: 10px;
+}

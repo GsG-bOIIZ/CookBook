@@ -1,0 +1,47 @@
+<div class="recipe">
+    <img class="recipe__image" src="assets/img/recipe/rectangle_8.png" alt="recipe">
+    <div class="recipe__card">
+        <div class="recipe__header">
+            <div class="recipe__header__tags">
+                <div *ngFor="let tag of recipe.tags">
+                    <div>{{tag}}</div>
+                </div>
+            </div>
+            
+            <div class="recipe__header__buttons">
+                <div>
+                    <img src="assets/img/recipe/star_off.svg" alt="">
+                    {{recipe.stars}}
+                </div>
+
+                <div>
+                    <img src="assets/img/recipe/heart_off.svg" alt="">
+                    {{recipe.likes}}
+                </div>
+            </div>            
+        </div>
+
+        <div class="recipe__text">
+            <div class="recipe__text__title">{{recipe.title}}</div>
+            <div class="recipe__text__description">{{recipe.description}}</div>
+        </div>
+
+        <div class="recipe__info">
+            <div class="recipe__info__cooking-time">
+                <img class="recipe__img-time" src="assets/img/recipe/time.svg" alt="">
+                <div>
+                    <div class="recipe__info__caption">Время приготовления:</div>
+                    <div class="recipe__info__content">{{recipe.cookingTime}} мин</div>
+                </div>
+            </div>
+
+            <div class="recipe__info__persons">
+                <img class="recipe__img-persons" src="assets/img/recipe/persons.svg" alt="">
+                <div class="recipe__info__persons_position">
+                    <div class="recipe__info__caption">Рецепт на:</div>
+                    <div class="recipe__info__content">{{recipe.portions}} персон</div>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>

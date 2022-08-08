@@ -1,0 +1,9 @@
+<div class="bg">  
+    <p>recipes-page works!</p>
+    <div class="recipes">
+        <app-recipe-item
+                *ngFor="let recipe of recipes"
+                [recipe]="recipe"
+        ></app-recipe-item>
+    </div>
+</div> 
