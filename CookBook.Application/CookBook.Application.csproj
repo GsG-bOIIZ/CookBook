@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CookBook.Domain\CookBook.Domain.csproj" />
-    <ProjectReference Include="..\CookBook.Infrastructure\CookBook.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

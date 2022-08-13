@@ -1,7 +1,8 @@
-using CookBook.Api.Services;
+using CookBook.Application;
+using CookBook.Application.Handlers;
+using CookBook.Domain;
 using CookBook.Infrastructure;
 using CookBook.Infrastructure.Repository;
-using CookBook.Infrastructure.UoW;
 using Microsoft.EntityFrameworkCore;
 
 namespace CookBook.Api
@@ -10,7 +11,6 @@ namespace CookBook.Api
     {
         public static void Main(string[] args)
         {
-
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllers();
 
@@ -30,6 +30,7 @@ namespace CookBook.Api
             builder.Services.AddScoped<IUnitOfWork, CookBookDbContext>();
             builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
             builder.Services.AddScoped<IRecipeService, RecipeService>();
+            builder.Services.AddScoped<IRecipeHandler, RecipeHandler>();
 
             var app = builder.Build();
             app.MapControllers();

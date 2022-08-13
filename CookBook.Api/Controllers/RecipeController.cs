@@ -1,6 +1,6 @@
 ﻿using CookBook.Application.Dto;
-using CookBook.Api.Services;
 using Microsoft.AspNetCore.Mvc;
+using CookBook.Application.Handlers;
 
 namespace CookBook.Api.Controllers
 {
@@ -8,11 +8,11 @@ namespace CookBook.Api.Controllers
     [Route("api/recipe")]
     public class RecipeController : ControllerBase
     {
-        private readonly IRecipeService _recipeService;
+        private readonly IRecipeHandler _recipeHandler;
 
-        public RecipeController(IRecipeService recipeService)
+        public RecipeController(IRecipeHandler recipeHandler)
         {
-            _recipeService = recipeService;
+            _recipeHandler = recipeHandler;
         }
 
         [HttpGet]
@@ -21,7 +21,7 @@ namespace CookBook.Api.Controllers
         {
             try
             {
-                return Ok(_recipeService.GetRecipes()
+                return Ok(_recipeHandler.GetRecipesFromDatabase()
                     .ConvertAll(t => t.ConvertToRecipeDto()));
             }
             catch (Exception ex)
@@ -36,7 +36,7 @@ namespace CookBook.Api.Controllers
         {
             try
             {
-                return Ok(_recipeService.GetRecipe(recipeId).ConvertToRecipeDto());
+                return Ok(_recipeHandler.GetRecipeFromDatabase(recipeId).ConvertToRecipeDto());
             }
             catch (Exception ex)
             {
@@ -46,11 +46,11 @@ namespace CookBook.Api.Controllers
 
         [HttpPost]
         [Route("create")]
-        public IActionResult CreateFaculty([FromBody] RecipeDto recipe)
+        public IActionResult CreateRecipe([FromBody] RecipeDto recipe)
         {
             try
             {
-                _recipeService.CreateRecipe(recipe);
+                _recipeHandler.CreateRecipeAndStoreInDatabase(recipe);
                 return Ok();
             }
             catch (Exception ex)
@@ -65,7 +65,7 @@ namespace CookBook.Api.Controllers
         {
             try
             {
-                _recipeService.DeleteRecipe(recipeId);
+                _recipeHandler.DeleteRecipeAndStoreInDatabase(recipeId);
                 return Ok();
             }
             catch (Exception ex)
@@ -76,11 +76,11 @@ namespace CookBook.Api.Controllers
 
         [HttpPost]
         [Route("update")]
-        public IActionResult UpdateFaculty([FromBody] RecipeDto recipe)
+        public IActionResult UpdateRecipe([FromBody] RecipeDto recipe)
         {
             try
             {
-                _recipeService.UpdateRecipe(recipe);
+                _recipeHandler.UpdateRecipeAndStoreInDatabase(recipe);
                 return Ok();
             }
             catch (Exception ex)

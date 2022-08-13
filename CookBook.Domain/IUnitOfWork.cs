@@ -1,4 +1,4 @@
-﻿namespace CookBook.Infrastructure.UoW
+﻿namespace CookBook.Domain
 {
     public interface IUnitOfWork
     {
