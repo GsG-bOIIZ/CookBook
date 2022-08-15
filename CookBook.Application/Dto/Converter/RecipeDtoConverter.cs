@@ -1,10 +1,10 @@
 ﻿using CookBook.Domain;
 
-namespace CookBook.Api.Dto
+namespace CookBook.Application.Dto
 {
-    public static class RecipeDtoExtension
+    public class RecipeDtoConverter : IRecipeDtoConverter
     {
-        public static Recipe ConvertToRecipe(this RecipeDto recipe)
+        public Recipe ConvertToRecipe(RecipeDto recipe)
         {
             return new Recipe
             {
@@ -15,10 +15,10 @@ namespace CookBook.Api.Dto
                 Portions = recipe.Portions,
                 Stars = recipe.Stars,
                 Likes = recipe.Likes
-    };
+            };
         }
 
-        public static RecipeDto ConvertToRecipeDto(this Recipe recipeDto)
+        public RecipeDto ConvertToRecipeDto(Recipe recipeDto)
         {
             return new RecipeDto
             {
@@ -31,6 +31,5 @@ namespace CookBook.Api.Dto
                 Likes = recipeDto.Likes
             };
         }
-
     }
 }

@@ -1,19 +1,17 @@
 ﻿using CookBook.Domain;
-using CookBook.Api.Dto;
-using CookBook.Infrastructure.UoW;
-using CookBook.Infrastructure.Repository;
+using CookBook.Application.Dto;
 
-namespace CookBook.Api.Services
+namespace CookBook.Application
 {
     public class RecipeService : IRecipeService
     {
         private readonly IRecipeRepository _recipeRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IRecipeDtoConverter _recipeDtoConverter;
 
-        public RecipeService(IRecipeRepository recipeRepository, IUnitOfWork unitOfWork)
+        public RecipeService(IRecipeRepository recipeRepository, IRecipeDtoConverter recipeDtoConverter)
         {
             _recipeRepository = recipeRepository;
-            _unitOfWork = unitOfWork;
+            _recipeDtoConverter = recipeDtoConverter;
         }
 
         public List<Recipe> GetRecipes()
@@ -28,10 +26,9 @@ namespace CookBook.Api.Services
                 throw new Exception($"{nameof(recipe)} not found");
             }
 
-            Recipe recipeEntity = recipe.ConvertToRecipe();
+            Recipe recipeEntity = _recipeDtoConverter.ConvertToRecipe(recipe);
 
             _recipeRepository.Create(recipeEntity);
-            _unitOfWork.SaveChanges();
 
         }
 
@@ -44,7 +41,6 @@ namespace CookBook.Api.Services
             }
 
             _recipeRepository.Delete(recipe);
-            _unitOfWork.SaveChanges();
         }
 
         public Recipe GetRecipe(int recipeId)
@@ -65,10 +61,30 @@ namespace CookBook.Api.Services
                 throw new Exception($"{nameof(recipeDto)} not found");
             }
 
-            Recipe facultyEntity = recipeDto.ConvertToRecipe();
+            Recipe recipeEntity = _recipeDtoConverter.ConvertToRecipe(recipeDto);
+            Recipe recipeForUpdate = GetRecipe(recipeEntity.Id);
 
-            _recipeRepository.Update(facultyEntity);
-            _unitOfWork.SaveChanges();
+            if (recipeForUpdate.Title != recipeEntity.Title)
+            {
+                recipeForUpdate.Title = recipeEntity.Title;
+            }
+
+            if (recipeForUpdate.Description != recipeEntity.Description)
+            {
+                recipeForUpdate.Description = recipeEntity.Description;
+            }
+
+            if (recipeForUpdate.CookingTime != recipeEntity.CookingTime)
+            {
+                recipeForUpdate.CookingTime = recipeEntity.CookingTime;
+            }
+
+            if (recipeForUpdate.Portions != recipeEntity.Portions)
+            {
+                recipeForUpdate.Portions = recipeEntity.Portions;
+            }
+
+            _recipeRepository.Update(recipeForUpdate);
         }
 
     }

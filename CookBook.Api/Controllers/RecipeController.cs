@@ -1,6 +1,6 @@
-﻿using CookBook.Api.Dto;
-using CookBook.Api.Services;
+﻿using CookBook.Application.Dto;
 using Microsoft.AspNetCore.Mvc;
+using CookBook.Application.Handlers;
 
 namespace CookBook.Api.Controllers
 {
@@ -8,11 +8,26 @@ namespace CookBook.Api.Controllers
     [Route("api/recipe")]
     public class RecipeController : ControllerBase
     {
-        private readonly IRecipeService _recipeService;
+        private readonly ICreateRecipeAndStoreInDatabaseHandler _recipeCreateHandler;
+        private readonly IDeleteRecipeAndStoreInDatabaseHandler _recipeDeleteHandler;
+        private readonly IGetRecipeFromDatabaseHandler _recipeGetRecipeHandler;
+        private readonly IGetRecipesFromDatabaseHandler _recipeGetRecipesHandler;
+        private readonly IUpdateRecipeAndStoreInDatabaseHandler _recipeUpdateHandler;
+        private readonly IRecipeDtoConverter _recipeDtoConverter;
 
-        public RecipeController(IRecipeService recipeService)
+        public RecipeController(ICreateRecipeAndStoreInDatabaseHandler recipeCreateHandler,
+                                IDeleteRecipeAndStoreInDatabaseHandler recipeDeleteHandler,
+                                IGetRecipeFromDatabaseHandler recipeGetRecipeHandler,
+                                IGetRecipesFromDatabaseHandler recipeGetRecipesHandler,
+                                IUpdateRecipeAndStoreInDatabaseHandler recipeUpdateHandler,
+                                IRecipeDtoConverter recipeDtoConverter)
         {
-            _recipeService = recipeService;
+            _recipeCreateHandler = recipeCreateHandler;
+            _recipeDeleteHandler = recipeDeleteHandler;
+            _recipeGetRecipeHandler = recipeGetRecipeHandler;
+            _recipeGetRecipesHandler = recipeGetRecipesHandler;
+            _recipeUpdateHandler = recipeUpdateHandler;
+            _recipeDtoConverter = recipeDtoConverter;
         }
 
         [HttpGet]
@@ -21,8 +36,8 @@ namespace CookBook.Api.Controllers
         {
             try
             {
-                return Ok(_recipeService.GetRecipes()
-                    .ConvertAll(t => t.ConvertToRecipeDto()));
+                return Ok(_recipeGetRecipesHandler.Handle()
+                    .ConvertAll(recipe => _recipeDtoConverter.ConvertToRecipeDto(recipe)));
             }
             catch (Exception ex)
             {
@@ -36,7 +51,7 @@ namespace CookBook.Api.Controllers
         {
             try
             {
-                return Ok(_recipeService.GetRecipe(recipeId).ConvertToRecipeDto());
+                return Ok(_recipeDtoConverter.ConvertToRecipeDto(_recipeGetRecipeHandler.Handle(recipeId)));
             }
             catch (Exception ex)
             {
@@ -46,11 +61,11 @@ namespace CookBook.Api.Controllers
 
         [HttpPost]
         [Route("create")]
-        public IActionResult CreateFaculty([FromBody] RecipeDto recipe)
+        public IActionResult CreateRecipe([FromBody] RecipeDto recipe)
         {
             try
             {
-                _recipeService.CreateRecipe(recipe);
+                _recipeCreateHandler.Handle(recipe);
                 return Ok();
             }
             catch (Exception ex)
@@ -65,7 +80,7 @@ namespace CookBook.Api.Controllers
         {
             try
             {
-                _recipeService.DeleteRecipe(recipeId);
+                _recipeDeleteHandler.Handle(recipeId);
                 return Ok();
             }
             catch (Exception ex)
@@ -76,11 +91,11 @@ namespace CookBook.Api.Controllers
 
         [HttpPost]
         [Route("update")]
-        public IActionResult UpdateFaculty([FromBody] RecipeDto recipe)
+        public IActionResult UpdateRecipe([FromBody] RecipeDto recipe)
         {
             try
             {
-                _recipeService.UpdateRecipe(recipe);
+                _recipeUpdateHandler.Handle(recipe);
                 return Ok();
             }
             catch (Exception ex)
