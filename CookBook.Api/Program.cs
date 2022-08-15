@@ -1,4 +1,5 @@
 using CookBook.Application;
+using CookBook.Application.Dto;
 using CookBook.Application.Handlers;
 using CookBook.Domain;
 using CookBook.Infrastructure;
@@ -27,10 +28,17 @@ namespace CookBook.Api
                 }
             });
 
-            builder.Services.AddScoped<IUnitOfWork, CookBookDbContext>();
+            builder.Services.AddScoped<IUnitOfWork>(sp => sp.GetService<CookBookDbContext>());
             builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
             builder.Services.AddScoped<IRecipeService, RecipeService>();
-            builder.Services.AddScoped<IRecipeHandler, RecipeHandler>();
+
+            builder.Services.AddScoped<ICreateRecipeAndStoreInDatabaseHandler, CreateRecipeAndStoreInDatabaseHandler>();
+            builder.Services.AddScoped<IDeleteRecipeAndStoreInDatabaseHandler, DeleteRecipeAndStoreInDatabaseHandler>();
+            builder.Services.AddScoped<IGetRecipeFromDatabaseHandler, GetRecipeFromDatabaseHandler>();
+            builder.Services.AddScoped<IGetRecipesFromDatabaseHandler, GetRecipesFromDatabaseHandler>();
+            builder.Services.AddScoped<IUpdateRecipeAndStoreInDatabaseHandler, UpdateRecipeAndStoreInDatabaseHandler>();
+
+            builder.Services.AddScoped<IRecipeDtoConverter, RecipeDtoConverter>();
 
             var app = builder.Build();
             app.MapControllers();

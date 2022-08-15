@@ -2,9 +2,9 @@
 
 namespace CookBook.Application.Dto
 {
-    public static class DtoConverter
+    public class RecipeDtoConverter : IRecipeDtoConverter
     {
-        public static Recipe ConvertToRecipe(this RecipeDto recipe)
+        public Recipe ConvertToRecipe(RecipeDto recipe)
         {
             return new Recipe
             {
@@ -18,7 +18,7 @@ namespace CookBook.Application.Dto
             };
         }
 
-        public static RecipeDto ConvertToRecipeDto(this Recipe recipeDto)
+        public RecipeDto ConvertToRecipeDto(Recipe recipeDto)
         {
             return new RecipeDto
             {

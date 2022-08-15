@@ -6,10 +6,12 @@ namespace CookBook.Application
     public class RecipeService : IRecipeService
     {
         private readonly IRecipeRepository _recipeRepository;
+        private readonly IRecipeDtoConverter _recipeDtoConverter;
 
-        public RecipeService(IRecipeRepository recipeRepository)
+        public RecipeService(IRecipeRepository recipeRepository, IRecipeDtoConverter recipeDtoConverter)
         {
             _recipeRepository = recipeRepository;
+            _recipeDtoConverter = recipeDtoConverter;
         }
 
         public List<Recipe> GetRecipes()
@@ -24,7 +26,7 @@ namespace CookBook.Application
                 throw new Exception($"{nameof(recipe)} not found");
             }
 
-            Recipe recipeEntity = recipe.ConvertToRecipe();
+            Recipe recipeEntity = _recipeDtoConverter.ConvertToRecipe(recipe);
 
             _recipeRepository.Create(recipeEntity);
 
@@ -59,7 +61,7 @@ namespace CookBook.Application
                 throw new Exception($"{nameof(recipeDto)} not found");
             }
 
-            Recipe recipeEntity = recipeDto.ConvertToRecipe();
+            Recipe recipeEntity = _recipeDtoConverter.ConvertToRecipe(recipeDto);
             Recipe recipeForUpdate = GetRecipe(recipeEntity.Id);
 
             if (recipeForUpdate.Title != recipeEntity.Title)
