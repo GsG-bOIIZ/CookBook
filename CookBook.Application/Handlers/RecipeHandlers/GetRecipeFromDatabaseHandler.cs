@@ -1,4 +1,4 @@
-﻿using CookBook.Domain;
+﻿using CookBook.Domain.Recipe;
 
 namespace CookBook.Application.Handlers
 {

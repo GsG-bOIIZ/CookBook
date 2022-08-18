@@ -1,4 +1,4 @@
-﻿using CookBook.Domain;
+﻿using CookBook.Domain.Recipe;
 using CookBook.Application.Dto;
 
 namespace CookBook.Application
