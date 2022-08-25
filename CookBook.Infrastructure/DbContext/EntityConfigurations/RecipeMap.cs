@@ -14,8 +14,6 @@ namespace CookBook.Infrastructure.Configuration
             builder.Property(x => x.Description).IsRequired();
             builder.Property(x => x.CookingTime).HasColumnType("int");
             builder.Property(x => x.Portions).HasColumnType("int");
-            builder.Property(x => x.Stars).HasColumnType("int");
-            builder.Property(x => x.Likes).HasColumnType("int");
         }
     }
 }

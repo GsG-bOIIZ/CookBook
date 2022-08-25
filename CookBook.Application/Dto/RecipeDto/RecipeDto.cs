@@ -7,7 +7,7 @@
         public string Description { get; set; }
         public int CookingTime { get; set; }
         public int Portions { get; set; }
-        public int Stars { get; set; }
-        public int Likes { get; set; }
+        /*public int Stars { get; set; }
+        public int Likes { get; set; }*/
     }
 }
