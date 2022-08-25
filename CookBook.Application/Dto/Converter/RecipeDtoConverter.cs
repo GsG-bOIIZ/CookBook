@@ -1,4 +1,4 @@
-﻿using CookBook.Domain;
+﻿using CookBook.Domain.Recipe;
 
 namespace CookBook.Application.Dto
 {
@@ -13,8 +13,8 @@ namespace CookBook.Application.Dto
                 Description = recipe.Description,
                 CookingTime = recipe.CookingTime,
                 Portions = recipe.Portions,
-                Stars = recipe.Stars,
-                Likes = recipe.Likes
+                /*Stars = recipe.Stars,
+                Likes = recipe.Likes*/
             };
         }
 
@@ -27,8 +27,8 @@ namespace CookBook.Application.Dto
                 Description = recipeDto.Description,
                 CookingTime = recipeDto.CookingTime,
                 Portions = recipeDto.Portions,
-                Stars = recipeDto.Stars,
-                Likes = recipeDto.Likes
+                /*Stars = recipeDto.Stars,
+                Likes = recipeDto.Likes*/
             };
         }
     }

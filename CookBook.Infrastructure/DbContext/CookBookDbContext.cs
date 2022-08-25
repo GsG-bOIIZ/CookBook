@@ -1,4 +1,5 @@
 ﻿using CookBook.Domain;
+using CookBook.Domain.Recipe;
 using CookBook.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 

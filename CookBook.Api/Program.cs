@@ -2,6 +2,7 @@ using CookBook.Application;
 using CookBook.Application.Dto;
 using CookBook.Application.Handlers;
 using CookBook.Domain;
+using CookBook.Domain.Recipe;
 using CookBook.Infrastructure;
 using CookBook.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
